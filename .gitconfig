@@ -19,10 +19,10 @@
     amend = commit -a --amend
 # Rebase local commits to come after pulled code, the --prune option removes remote-tracking branches that no longer exist on the remote
     up = !git pull --rebase --prune $@ && git submodule update --init --recursive
-# Deletes all branches already merged into master
-    bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+# Deletes all branches already merged into dev
+    bclean = "!f() { git branch --merged ${1-dev} | grep -v " ${1-dev}$" | xargs -r git branch -d; }; f"
 # Checkout master (or other branch) and run up and bclean
-    bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
+    bdone = "!f() { git checkout ${1-dev} && git up && git bclean ${1-dev}; }; f"
 # Spit out a log for the last month. Typically I tailor this to a particular date, but seems nice to "save" it here
     month-log = log --since '1 month ago' --format='%s%Creset' --no-merges
 # List all aliases
@@ -32,3 +32,5 @@
 	name = William Tilton
 [credential]
 	helper = manager
+[credential "github.com"]
+	useHttpPath = true
