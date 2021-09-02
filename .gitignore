@@ -3,5 +3,4 @@
 !/.gitconfig
 !/.vsvimrc
 !/.vimrc
-!/init.vim
-!/plug.vim
+!*.vim
