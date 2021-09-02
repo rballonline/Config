@@ -3,5 +3,5 @@
 !/.gitconfig
 !/.vsvimrc
 !/.vimrc
-!/AppData/Local/nvim/init.vim
-!/AppData/Local/nvim-data/site/autoload/plug.vim
+!/init.vim
+!/plug.vim
