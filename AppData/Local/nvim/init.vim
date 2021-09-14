@@ -1,13 +1,16 @@
 call plug#begin('~/AppData/Local/nvim/plugged')
 
-Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdtree'
-Plug 'ryanoasis/vim-devicons'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'cohama/lexima.vim'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround' " Change surrounding braces, quotes, parenthesis etc
+Plug 'scrooloose/nerdtree' " Navigate files
+Plug 'ryanoasis/vim-devicons' " Icons in file viewer
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Code completion
+Plug 'cohama/lexima.vim' " Paren and brace completion.
+Plug 'tpope/vim-fugitive' "  Git integration
 Plug 'tpope/vim-rhubarb'
-Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline' " Bottom status stuff
+Plug 'myusuf3/numbers.vim' " Line numbers for files
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
 
@@ -51,6 +54,22 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 vmap <leader>f  <Plug>(coc-format-selected)<cr>
 nmap <leader>f  <Plug>(coc-format-selected)<cr>
 
-source coc.vim
-source neovide.vim
-source screen.vim
+" Numbers
+let g:numbers_exclude = ['tagbar', 'gundo', 'minibufexpl', 'nerdtree', 'airline']
+
+" Neovide
+let g:neovide_cursor_vfx_mode = "railgun"
+let g:neovide_remember_window_size = v:true
+
+" Telescope
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+if has("win32")
+	source $HOME/AppData/Local/nvim/coc.vim
+else
+	source ~/.config/nvim/coc.vim
+endif
+" source screen.vim
