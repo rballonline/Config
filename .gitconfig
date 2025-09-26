@@ -14,14 +14,5 @@
 	month-log = log --since '1 month ago' --format='%s%Creset' --no-merges # Spit out a log for the last month. Typically I tailor this to a particular date, but seems nice to "save" it here
 	la=!git config -l | grep alias | cut -c 7- # List all aliases
 	rmi = git rm -r --cached . && git add . && git commit -am "Remove ignored files" # Remove all ignored files
-[user]
-	email = william.tilton@caci.com
-	name = William Tilton
-[credential]
-	helper = manager
-[credential "github.com"]
-	useHttpPath = true
-[merge]
-	tool = p4merge
-[mergetool "p4merge"]
-	path = C:/Program Files/Perforce/p4merge.exe
+[push]
+	autoSetupRemote = true
