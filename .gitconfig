@@ -32,3 +32,7 @@
 	name = William Tilton
 [credential]
 	helper = manager
+[safe]
+	directory = C:/Code/tiltedevcom
+	directory = C:/Code/OpenCartPss
+	directory = C:/Code/gangsheet-builder
