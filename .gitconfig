@@ -1,34 +1,36 @@
-[merge]
-	tool = p4merge
-[mergetool "p4merge"]
-	path = C:/Program Files/Perforce/p4merge.exe
 [alias]
 # Add all to stage and commit, needs a message, eg: git cm "Commit msg"
-    cm = !git add -A && git commit -am
+	cm = !git add -A && git commit -am
+# Quick status
+	st = status
+# Checkout a branch, eg: git co main
+	co = checkout
 # Create and switch to branch, eg: git cob newBranch
-    cob = checkout -b
+	cob = checkout -b
 # Save your current work
-    save = !git add -A && git commit -am 'NOREP: SAVEPOINT'
-# Reset to the prior save point
-    wipe = !git add -A && git commit -qm 'NOREP: WIPE SAVEPOINT' && git reset HEAD~1 --hard
+	save = !git add -A && git commit -am 'SAVEPOINT'
+# Reset to the prior save point while still keeping a record of it
+	wipe = !git add -A && git commit -qm 'SAVEPOINT: Wipe' && git reset HEAD~1 --hard
 # Undo prior commit (SAVEPOINT) while keeping changes
-    undo = reset HEAD~1 --mixed
+	undo = reset HEAD~1 --mixed
 # Re-save
-    rsave = !git undo && git save
-# OR Change commit message of most recent commit
-    amend = commit -a --amend
+	rsave = !git undo && git save
+# Change commit message of most recent commit
+	amend = commit -a --amend
 # Rebase local commits to come after pulled code, the --prune option removes remote-tracking branches that no longer exist on the remote
-    up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+	up = !git pull --rebase --prune $@ && git submodule update --init --recursive
 # Deletes all branches already merged into master
-    bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+	bclean = "!f() { git branch --merged ${1-master} | grep -v \" ${1-master}$\" | xargs -r git branch -d; }; f"
 # Checkout master (or other branch) and run up and bclean
-    bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
-# Spit out a log for the last month. Typically I tailor this to a particular date, but seems nice to "save" it here
-    month-log = log --since '1 month ago' --format='%s%Creset' --no-merges
+	bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
+# Spit out a log for the last month
+	month-log = log --since '1 month ago' --format='%s%Creset' --no-merges
 # List all aliases
-    la=!git config -l | grep alias | cut -c 7-
+	la=!git config -l | grep alias | cut -c 7-
+# Remove all ignored files
+	rmi = !git rm -r --cached . && git add . && git commit -am "Remove ignored files"
 [user]
-	email = william.tilton@caci.com
+	email = rballonline@gmail.com
 	name = William Tilton
 [credential]
 	helper = manager
@@ -36,3 +38,7 @@
 	directory = C:/Code/tiltedevcom
 	directory = C:/Code/OpenCartPss
 	directory = C:/Code/gangsheet-builder
+[push]
+	autoSetupRemote = true
+[windows]
+	appendAtomically = false
